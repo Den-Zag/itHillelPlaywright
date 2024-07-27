@@ -28,7 +28,7 @@ const config = defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    headless: false,
+    headless: true,
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://qauto.forstudy.space/',
     httpCredentials: {
@@ -48,38 +48,38 @@ const config = defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: "setup:stage",
-      testMatch: 'tests/setup/**/*.setup.js'
-    },
-    {
-      name: 'teardown:stage',
-      testMatch: 'tests/teardown/**/*.teardown.js'
-    },
-    {
-      name: 'stage',
-      use: {
-        ...devices['Desktop Chrome'],
-        baseURL: 'https://qauto.forstudy.space/',
-      },
-      dependencies: ['setup:stage'],
-      teardown: 'teardown:stage'
-    },
+  //   {
+  //     name: "setup:stage",
+  //     testMatch: 'tests/setup/**/*.setup.js'
+  //   },
+  //   {
+  //     name: 'teardown:stage',
+  //     testMatch: 'tests/teardown/**/*.teardown.js'
+  //   },
+  //   {
+  //     name: 'stage',
+  //     use: {
+  //       ...devices['Desktop Chrome'],
+  //       baseURL: 'https://qauto.forstudy.space/',
+  //     },
+  //     dependencies: ['setup:stage'],
+  //     teardown: 'teardown:stage'
+  //   },
 
+  //   {
+  //     name: 'dev',
+  //     use: {
+  //       ...devices['Desktop Chrome'],
+  //       baseURL: 'https://qauto2.forstudy.space/',
+  //     },
+  //   },
+    
     {
-      name: 'dev',
+      name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        baseURL: 'https://qauto2.forstudy.space/',
       },
     },
-    
-    // {
-    //   name: 'chromium',
-    //   use: {
-    //     ...devices['Desktop Chrome'],
-    //   },
-    // },
     // {
     //   name: 'firefox',
     //   use: {

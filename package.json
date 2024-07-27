@@ -6,8 +6,10 @@
   "type": "module",
   "scripts": {
     "test": "npx playwright test",
-    "test:ui": "npx playwright test --ui",
-    "report": "npx playwright show-report"
+    "testui": "npx playwright test --ui",
+    "rpt": "npx playwright show-report",
+    "hw22": "npx playwright test tests/locators/hw22.spec.js",
+    "hw22ui": "npx playwright test tests/locators/hw22.spec.js --ui"
   },
   "keywords": [],
   "author": "",
