@@ -9,7 +9,10 @@
     "testui": "npx playwright test --ui",
     "rpt": "npx playwright show-report",
     "hw22": "npx playwright test tests/locators/hw22.spec.js",
-    "hw22ui": "npx playwright test tests/locators/hw22.spec.js --ui"
+    "hw22u": "npx playwright test tests/locators/hw22.spec.js --ui",
+    "tu": "npx playwright test tests/locators/t.spec.js --ui",
+    "hw23": "npx playwright test tests/registration_form/registrationForm.spec.js",
+    "hw23u": "npx playwright test tests/registration_form/registrationForm.spec.js --ui"
   },
   "keywords": [],
   "author": "",
