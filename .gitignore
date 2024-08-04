@@ -7,3 +7,4 @@ node_modules/
 tests/locators/t.spec.js
 
 .idea/
+.env
