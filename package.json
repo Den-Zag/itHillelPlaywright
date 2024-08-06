@@ -7,12 +7,14 @@
   "scripts": {
     "test": "npx playwright test",
     "testui": "npx playwright test --ui",
-    "rpt": "npx playwright show-report",
-    "hw22": "npx playwright test tests/locators/hw22.spec.js",
+    "report": "npx playwright show-report",
+    "hw22": "npx playwright test tests/locators/hw22.spec.js --reporter=dot",
     "hw22u": "npx playwright test tests/locators/hw22.spec.js --ui",
     "tu": "npx playwright test tests/locators/t.spec.js --ui",
-    "hw23": "npx playwright test tests/registration_form/registrationForm.spec.js",
-    "hw23u": "npx playwright test tests/registration_form/registrationForm.spec.js --ui"
+    "hw23": "npx playwright test tests/registration_form/registrationForm.spec.js --reporter=dot",
+    "hw23u": "npx playwright test tests/registration_form/registrationForm.spec.js --ui",
+    "hw26": "npx playwright test tests/locators/hw26.spec.js --reporter=dot",
+    "hw26u": "npx playwright test tests/locators/hw26.spec.js --ui"
   },
   "keywords": [],
   "author": "",
