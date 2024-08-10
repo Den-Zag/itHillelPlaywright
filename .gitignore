@@ -8,3 +8,4 @@ tests/locators/t.spec.js
 
 .idea/
 .env
+/state/user1.json
