@@ -14,13 +14,15 @@
     "hw23": "npx playwright test tests/registration_form/registrationForm.spec.js --reporter=dot",
     "hw23u": "npx playwright test tests/registration_form/registrationForm.spec.js --ui",
     "hw26": "npx playwright test tests/locators/hw26.spec.js --reporter=dot",
-    "hw26u": "npx playwright test tests/locators/hw26.spec.js --ui"
+    "hw26u": "npx playwright test tests/locators/hw26.spec.js --ui",
+    "hw27": "npx playwright test tests/locators/hw27.spec.js",
+    "hw27u": "npx playwright test tests/locators/hw27.spec.js --ui"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.45.2",
+    "@playwright/test": "^1.46.0",
     "@types/node": "^20.14.11"
   },
   "dependencies": {
