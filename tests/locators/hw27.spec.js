@@ -1,16 +1,6 @@
 import {test, expect} from "../../src/fixtures/myFixtures.js";
 
 
-const mockedCarBrands = {
-  "status": "ok",
-  "data": {
-    "lastName": "testLastName",
-    "name": "testName",
-    "photoFilename": "default-user.png",
-    "userId": 131720
-  }
-}
-
 test.describe('Network - Garage', () => {
   
   test.beforeEach(async ({ garagePage}) => {
@@ -18,13 +8,26 @@ test.describe('Network - Garage', () => {
   })
 
   test('Mocked value', async ({garagePage, page}) => {
+    const mockedUsersProfile = {
+      "status": "ok",
+      "data": {
+        "lastName": "testLastName",
+        "name": "testName",
+        "photoFilename": "default-user.png",
+        "userId": 131720
+      }
+    }
+    
     await page.route("/api/users/profile", async route =>{
       await route.fulfill({
-          status: 200,
-          json: mockedCarBrands
-        })
+        status: 200,
+        json: mockedUsersProfile
+      })
     })
-    await page.pause()
+    
+    await garagePage.profileButton.click()
+    await expect(garagePage.profilNameAndLastName).toHaveText(mockedUsersProfile.data.name + ' ' + mockedUsersProfile.data.lastName)
+    
   });
 })
 
@@ -60,16 +63,46 @@ test.describe("Cars", ()=>{
 
   test("Creating a car with invalid values for carBrandId", async({request})=>{
     const requestBody = {
-        "carBrandId": 1000000,
-        "carModelId": 1,
-        "mileage": 122
+      "carBrandId": 1000000,
+      "carModelId": 1,
+      "mileage": 122
+    }
+    const expectedResponseBody = {
+      "message": "Brand not found", 
+      "status": "error"
     }
 
     const response = await request.post('/api/cars', {
         data: requestBody
     })
 
-    expect(response.ok()).toBeFalsy()
-    
+    expect(response).not.toBeOK()
+    expect(response.status()).toBe(404)
+
+    const body = await response.json()
+    expect(body).toMatchObject(expectedResponseBody)
+
+  })
+
+  test("Creating a car without mileage", async({request})=>{
+    const requestBody = {
+      "carBrandId": 2,
+      "carModelId": 1
+    }
+    const expectedResponseBody = {
+      "message": "Mileage is required", 
+      "status": "error"
+    }
+
+    const response = await request.post('/api/cars', {
+        data: requestBody
+    })
+
+    expect(response).not.toBeOK()
+    expect(response.status()).toBe(400)
+
+    const body = await response.json()
+    expect(body).toMatchObject(expectedResponseBody)
+
   })
 })
