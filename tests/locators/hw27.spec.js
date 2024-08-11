@@ -7,7 +7,7 @@ test.describe('Network - Garage', () => {
     await garagePage.navigate()
   })
 
-  test('Mocked value', async ({garagePage, page}) => {
+  test('Mocked value', async ({profilePage, page}) => {
     const mockedUsersProfile = {
       "status": "ok",
       "data": {
@@ -18,15 +18,15 @@ test.describe('Network - Garage', () => {
       }
     }
     
-    await page.route("/api/users/profile", async route =>{
+    await page.route("api/users/profile", async route =>{
       await route.fulfill({
         status: 200,
         json: mockedUsersProfile
       })
     })
     
-    await garagePage.profileButton.click()
-    await expect(garagePage.profilNameAndLastName).toHaveText(mockedUsersProfile.data.name + ' ' + mockedUsersProfile.data.lastName)
+    await profilePage.profileButton.click()
+    await expect(profilePage.profilNameAndLastName).toHaveText(mockedUsersProfile.data.name + ' ' + mockedUsersProfile.data.lastName)
     
   });
 })
@@ -76,7 +76,6 @@ test.describe("Cars", ()=>{
         data: requestBody
     })
 
-    expect(response).not.toBeOK()
     expect(response.status()).toBe(404)
 
     const body = await response.json()
@@ -98,7 +97,6 @@ test.describe("Cars", ()=>{
         data: requestBody
     })
 
-    expect(response).not.toBeOK()
     expect(response.status()).toBe(400)
 
     const body = await response.json()
