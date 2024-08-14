@@ -24,7 +24,7 @@ test.describe("Expenses", ()=>{
   test('Add expenses', async ({request}) => {
     const requestBody = {
       "carId": carId,
-      "reportedAt": "2024-08-14",
+      "reportedAt": new Date().toISOString().split('T')[0],
       "mileage": bodyForRequest.mileage + 1,
       "liters": 1,
       "totalCost": 100,
