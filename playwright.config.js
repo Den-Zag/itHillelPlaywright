@@ -2,6 +2,7 @@
 import { defineConfig, devices } from '@playwright/test'
 import dotenv from 'dotenv'
 import path from 'node:path'
+import {USER1_STORAGE_STATE_PATH} from "./src/data/constants.js";
 
 
 /**
@@ -21,17 +22,24 @@ const config = defineConfig({
   testIgnore: '/tests/**/*.skip.spec.js',
   globalSetup: process.env.ENV === 'stage' ? './global.setup.js' : undefined,
   globalTeardown: './global.teardown.js',
-  maxFailures: 10,
   /* Run tests in files in parallel */
   fullyParallel: false,
+  timeout: 60_000,
+  expect: {
+    timeout: 6_000
+  },
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
+  maxFailures: 10,
   /* Retry on CI only */
   retries: 0,
   /* Opt out of parallel tests on CI. */
   workers: 3,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['html', {open: process.env.CI ? 'never' : 'on-failure'}],
+    [process.env.CI ? 'dot' : 'list']
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     headless: false,
@@ -54,13 +62,17 @@ const config = defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    // {
-    //   name: "setup:stage",
-    //   testMatch: 'tests/setup/**/*.setup.js'
-    // },
     {
       name: "setup:stage",
       testMatch: 'tests/setup/**/*.setup.js'
+    },
+    {
+      name: 'chromium',
+      dependencies: ['setup:stage'],
+      use: {
+        ...devices['Desktop Chrome'],
+        // storageState: USER1_STORAGE_STATE_PATH
+      },
     },
   //   {
   //     name: 'teardown:stage',
@@ -83,62 +95,54 @@ const config = defineConfig({
   //       baseURL: 'https://qauto2.forstudy.space/',
   //     },
   //   },
-    
-    {
-      name: 'chromium',
-      dependencies: ['setup:stage'],
-      use: {
-        ...devices['Desktop Chrome'],
-      },
-    },
-    // {
-    //   name: 'firefox',
-    //   use: {
-    //     ...devices['Desktop Firefox']
-    //
-    //   },
-    // },
-    //
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+  // {
+  //   name: 'firefox',
+  //   use: {
+  //     ...devices['Desktop Firefox']
+  //
+  //   },
+  // },
+  //
+  // {
+  //   name: 'webkit',
+  //   use: { ...devices['Desktop Safari'] },
+  // },
 
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
+  /* Test against mobile viewports. */
+  // {
+  //   name: 'Mobile Chrome',
+  //   use: { ...devices['Pixel 5'] },
+  // },
+  // {
+  //   name: 'Mobile Safari',
+  //   use: { ...devices['iPhone 12'] },
+  // },
 
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+  /* Test against branded browsers. */
+  // {
+  //   name: 'Microsoft Edge',
+  //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+  // },
+  // {
+  //   name: 'Google Chrome',
+  //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+  // },
 
-    // {
-    //   name: 'stage',
-    //   use: {
-    //     ...devices['Desktop Chrome'],
-    //     baseURL: 'https://qauto.forstudy.space/',
-    //   },
-    // },
-    //
-    // {
-    //   name: 'dev',
-    //   use: {
-    //     ...devices['Desktop Chrome'],
-    //     baseURL: 'https://qauto2.forstudy.space/',
-    //   },
-    // },
+  // {
+  //   name: 'stage',
+  //   use: {
+  //     ...devices['Desktop Chrome'],
+  //     baseURL: 'https://qauto.forstudy.space/',
+  //   },
+  // },
+  //
+  // {
+  //   name: 'dev',
+  //   use: {
+  //     ...devices['Desktop Chrome'],
+  //     baseURL: 'https://qauto2.forstudy.space/',
+  //   },
+  // },
   ],
 
   /* Run your local dev server before starting the tests */

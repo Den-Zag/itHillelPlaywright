@@ -16,7 +16,9 @@
     "hw26": "npx playwright test tests/locators/hw26.spec.js --reporter=dot",
     "hw26u": "npx playwright test tests/locators/hw26.spec.js --ui",
     "hw27": "npx playwright test tests/locators/hw27.spec.js",
-    "hw27u": "npx playwright test tests/locators/hw27.spec.js --ui"
+    "hw27u": "npx playwright test tests/locators/hw27.spec.js --ui",
+    "hw28-1": "npx playwright test tests/api/garage/createCar.spec.js",
+    "hw28-2": "npx playwright test tests/api/garage/expensesCar.spec.js"
   },
   "keywords": [],
   "author": "",
