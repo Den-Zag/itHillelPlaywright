@@ -1,8 +1,8 @@
 FROM mcr.microsoft.com/playwright:v1.46.0-jammy
 
-RUN tests
+RUN mkdir playwright-tests
 
-WORKDIR tests
+WORKDIR playwright-tests
 
 COPY . .
 
