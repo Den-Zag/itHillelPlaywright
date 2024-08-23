@@ -1,6 +1,6 @@
 import {test, expect} from "../../src/fixtures/myFixtures.js";
 
-test.describe.only('Garage', () => {
+test.describe('Garage', () => {
     test.beforeEach(async ({ garagePage}) => {
         await garagePage.navigate()
     })
