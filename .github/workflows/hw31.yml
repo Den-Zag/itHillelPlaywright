@@ -3,7 +3,7 @@ name: "HW-30. Test-v001"
 on: push
 
 jobs:
-  api-tests for HW-30:
+  api_tests_for_hw_30:
     runs-on: ubuntu-22.04
     container: 'mcr.microsoft.com/playwright:v1.46.0-jammy'
     steps:
