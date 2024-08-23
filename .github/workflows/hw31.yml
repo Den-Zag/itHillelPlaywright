@@ -23,7 +23,7 @@ jobs:
           ENV: 'dev'
           HTTP_CREDENTIALS_USERNAME: ${{ secrets.HTTP_CREDENTIALS_USERNAME }}
           HTTP_CREDENTIALS_PASSWORD: ${{ secrets.HTTP_CREDENTIALS_PASSWORD }}
-        run: npm run test
+        run: npm run hw29
       - name: "Upload report to artifacts"
         if: failure()
         uses: actions/upload-artifact@v4
